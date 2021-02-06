@@ -1,0 +1,21 @@
+<html>
+    <center>
+    <body>
+        <h1>
+            {{artistName}}
+        </h1>
+        <h2>
+            {{songName}}
+        </h2>
+        <img src= {{songImage}} />
+        {% if songURL|string() == 'None' %}  <! cast songURL to string --> 
+            <h3> SONG PREVIEW LINK DOES NOT EXIST </h3>
+        {% else %}
+            <br>
+            <br>
+            <audio controls src={{songURL}}>
+            </audio>
+        {% endif %}
+    </body>
+    </center>
+</html>
