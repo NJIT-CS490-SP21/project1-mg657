@@ -1,15 +1,16 @@
 <html>
+    <link rel="stylesheet" href={{ url_for( 'static', filename='style.css' )}} />
     <center>
     <body>
         <h1>
-            {{artistName}}
+            {{songName}}
         </h1>
         <h2>
-            {{songName}}
+            By: {{artistName}}
         </h2>
         <img src= {{songImage}} />
         {% if songURL|string() == 'None' %}  <! cast songURL to string --> 
-            <h3> SONG PREVIEW LINK DOES NOT EXIST </h3>
+            <h3> <a href={{albumLink}} target="_blank">Check out the album!</a> </h3>
         {% else %}
             <br>
             <br>
