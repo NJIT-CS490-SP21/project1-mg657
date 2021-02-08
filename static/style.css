@@ -3,8 +3,15 @@ body{
     color: maroon;
 }
 h1{
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Courier New', monospace;
+    font-size: 200%;
 }
 h2{
     font-family: 'Roboto', sans-serif;
+    font-size: 150%;
+}
+a {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 105%;
+    color: maroon;
 }

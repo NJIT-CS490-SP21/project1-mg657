@@ -1,22 +1,33 @@
 <html>
-    <link rel="stylesheet" href={{ url_for( 'static', filename='style.css' )}} />
-    <center>
-    <body>
-        <h1>
-            {{songName}}
+	<link rel="stylesheet" href={{ url_for( 'static', filename='style.css' )}} />
+	<center>
+		<body>
+			<h1>
+            {{song_name}}
         </h1>
-        <h2>
-            By: {{artistName}}
+			<h2>
+            {%for i in range(0, len)%}
+                {% if i == 0 %}
+                By: {{artist_name[i]}}
+                {% elif i == len-1 %}
+                and {{artist_name[i]}}
+                {% else %}
+                , {{artist_name[i]}}
+                {% endif %}
+            {%endfor%} 
         </h2>
-        <img src= {{songImage}} />
-        {% if songURL|string() == 'None' %}  <! cast songURL to string --> 
-            <h3> <a href={{albumLink}} target="_blank">Check out the album!</a> </h3>
+		<img src= {{song_image}} />
+			<br>
+				<br>
+        {% if song_prev_link|string() == 'None' %}  <!--cast songURL to string-->
+			<a href={{song_link}} target="_blank">
+			    Song Preview Unavailable, 
+				    <br>
+				    Check it out on Spotify!
+			</a>
         {% else %}
-            <br>
-            <br>
-            <audio controls src={{songURL}}>
-            </audio>
+            <audio controls src={{song_prev_link}}></audio>
         {% endif %}
-    </body>
-    </center>
+		</body>
+	</center>
 </html>
