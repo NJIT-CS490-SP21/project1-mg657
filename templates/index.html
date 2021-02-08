@@ -19,7 +19,7 @@
 		<img src= {{song_image}} />
 			<br>
 				<br>
-        {% if song_prev_link|string() == 'None' %}  <!--cast songURL to string-->
+        {% if song_prev_link == None %}  <!--cast songURL to string-->
 			<a href={{song_link}} target="_blank">
 			    Song Preview Unavailable, 
 				    <br>
