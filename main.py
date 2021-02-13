@@ -23,7 +23,7 @@ headers = {
 params={ 'market': 'US'} # Specify market parameter
 artist_id = [
     "3TVXtAsR1Inumwj472S9r4", #Drake
-    "6eUKZXaKkcviH0Ku9w2n3V", #Ed Sheeran   
+    "06HL4z0CvFAxyc27GXpf02", #Taylor Swift   
     "66CXWjxzNUsdJxJ2JdwvnR", #Ariana Grande
     "4xRYI6VqpkE3UwrDrAZL8L", #Logic
     "4MCBfE4596Uoi2O4DtmEMz", #Juice Wrld
@@ -31,7 +31,6 @@ artist_id = [
     "07YZf4WDAMNwqr4jfgOZ8y", #Jason Derulo
     "0C8ZW7ezQVs4URX5aX7Kqx", #Selena Gomez
 ]
-
 
 @app.route('/')
 def songInfo():
@@ -47,6 +46,7 @@ def songInfo():
         0, len(req["tracks"]) - 1
     )  # Picks random song from all the songs by certain artist
     artist_name_list=req['tracks'][rand_song]['artists']
+    global song_name
     song_name=req['tracks'][rand_song]['name']
     song_image=req['tracks'][rand_song]['album']['images'][1]['url']
     song_prev_link=req['tracks'][rand_song]['preview_url']
@@ -54,6 +54,11 @@ def songInfo():
     artist_name = []
     for key in artist_name_list:  # For each item in list of artists
         artist_name.append(key["name"])  # Add the artist to the list
+    base_url_genius = "http://api.genius.com"
+    headers_genius = {'Authorization': 'Bearer ' + os.getenv("GENIUS_ACCESS_TOKEN")}
+    params_genius = {'q': song_name}
+    response_genius = requests.get(base_url_genius + "/search", params=params_genius, headers=headers_genius).json()
+    song_lyrics = response_genius['response']['hits'][0]['result']['url']
     return render_template(  # Send all info to html page
         "index.html",
         artist_name=artist_name,
@@ -61,9 +66,9 @@ def songInfo():
         song_image=song_image,
         song_prev_link=song_prev_link,
         song_link=song_link,
-        len=len(artist_name))
-
-
+        song_lyrics=song_lyrics,
+        len = len(artist_name))
+        
 app.run(
     port=int(os.getenv('PORT',8080)), 
     host=os.getenv('IP','0.0.0.0'),
