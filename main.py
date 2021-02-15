@@ -46,7 +46,7 @@ def songInfo():
         0, len(req["tracks"]) - 1
     )  # Picks random song from all the songs by certain artist
     artist_name_list=req['tracks'][rand_song]['artists']
-    global song_name
+    #global song_name
     song_name=req['tracks'][rand_song]['name']
     song_image=req['tracks'][rand_song]['album']['images'][1]['url']
     song_prev_link=req['tracks'][rand_song]['preview_url']
@@ -54,11 +54,6 @@ def songInfo():
     artist_name = []
     for key in artist_name_list:  # For each item in list of artists
         artist_name.append(key["name"])  # Add the artist to the list
-    base_url_genius = "http://api.genius.com"
-    headers_genius = {'Authorization': 'Bearer ' + os.getenv("GENIUS_ACCESS_TOKEN")}
-    params_genius = {'q': song_name}
-    response_genius = requests.get(base_url_genius + "/search", params=params_genius, headers=headers_genius).json()
-    song_lyrics = response_genius['response']['hits'][0]['result']['url']
     return render_template(  # Send all info to html page
         "index.html",
         artist_name=artist_name,
@@ -66,9 +61,31 @@ def songInfo():
         song_image=song_image,
         song_prev_link=song_prev_link,
         song_link=song_link,
-        song_lyrics=song_lyrics,
-        len = len(artist_name))
-        
+        song_lyrics = lyricInfo(song_name),
+        #song_lyrics=song_lyrics,
+        len = len(artist_name)
+        )
+def lyricInfo(song_name):
+    base_url_genius = "http://api.genius.com"
+    headers_genius = {'Authorization': 'Bearer ' + os.getenv("GENIUS_ACCESS_TOKEN")}
+    params_genius = {'q': song_name}
+    response_genius = requests.get(base_url_genius + "/search", params=params_genius, headers=headers_genius).json()
+    song_lyrics = response_genius['response']['hits'][0]['result']['url']
+    return song_lyrics
+@app.route('/search/<artist_name>')
+def search(artist_name):
+    headers = {
+    'Authorization': 'Bearer {token}'.format(token=access_token)}
+    params={ 'q': artist_name, 
+        'type': 'track,artist'
+    } # Specify market parameter 
+    req_artist = requests.get(
+        'https://api.spotify.com/v1/search', 
+        headers=headers,
+        params=params).json() # GET request for artist
+    artist_id = req_artist['artists']['items'][0]['id']
+    print(artist_id)
+    return {'artist_id': artist_id}
 app.run(
     port=int(os.getenv('PORT',8080)), 
     host=os.getenv('IP','0.0.0.0'),

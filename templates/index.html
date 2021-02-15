@@ -1,7 +1,10 @@
 <html>
 	<link rel="stylesheet" href={{ url_for( 'static', filename='style.css' )}} />
+	<script type="text/javascript" src="/static/script.js"></script>
 	<center>
 		<body>
+		    <p>Search for Artist: <input type="text" id='query'></p>
+             <button id="search">Click here!</button>
 			<h1>
             {{song_name}}
         </h1>
