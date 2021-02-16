@@ -1,41 +1,11 @@
 <html>
 	<link rel="stylesheet" href={{ url_for( 'static', filename='style.css' )}} />
-	<script type="text/javascript" src="/static/script.js"></script>
 	<center>
 		<body>
-		    <p>Search for Artist: <input type="text" id='query'></p>
-             <button id="search">Click here!</button>
-			<h1>
-            {{song_name}}
-        </h1>
-			<h2>
-            {%for i in range(0, len)%}
-                {% if i == 0 %}
-                By: {{artist_name[i]}}
-                {% elif i == len-1 %}
-                and {{artist_name[i]}}
-                {% else %}
-                , {{artist_name[i]}}
-                {% endif %}
-            {%endfor%} 
-        </h2>
-		<img src= {{song_image}} />
-			<br>
-				<br>
-        {% if song_prev_link == None %}  <!--cast songURL to string-->
-			<a href={{song_link}} target="_blank">
-			    Song Preview Unavailable, 
-				    <br>
-				    Check it out on Spotify!
-			</a>
-        {% else %}
-            <audio controls src={{song_prev_link}}></audio>
-        {% endif %}
-        <br>
-        <br>
-        <a href={{song_lyrics}} target="_blank">
-			    Check out the lyrics!
-			</a>
+		    <form action = "/result" method = "POST">
+                <p>Enter an Artist: <input type = "text" name = "Artist" /></p>
+                <input type = "submit" value = "Submit" />
+            </form>
 		</body>
 	</center>
 </html>
