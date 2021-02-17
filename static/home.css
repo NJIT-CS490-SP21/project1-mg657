@@ -1,0 +1,54 @@
+body{
+    background-color: Lavender;
+    color: maroon;
+}
+h1{
+    font-family: 'Lato', sans-serif;
+    font-size: 200%;
+}
+h2{
+    font-family: 'Roboto', sans-serif;
+    font-size: 150%;
+}
+a {
+    font-family: 'Trebuchet MS', sans-serif;
+    font-size: 105%;
+}
+.container1 {
+   height: 32em;
+   margin: 0;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   margin-right: -50%;
+   transform: translate(-50%, -50%) }
+input{
+    height: 2rem;
+    font-family: 'Lato', sans-serif;
+    border: 0;
+    outline: 0; 
+    border-radius: .7rem;
+    appearance: none;
+    transition: all .3s cubic-bezier(0, 0, 0.43, 1.49);
+    transition-property: width, border-radius;
+    z-index: 1;
+    position: relative;
+}
+input[type="text"] {
+    color: Lavender;
+    font-size: 1.8rem;
+    width: 100%;
+    background: Maroon;
+    padding: 0 1.6rem;
+}
+input[type="submit"] {
+    color: Maroon;
+    font-size: 1.2rem;
+    background: white;
+}
+.submit{
+    width: 25%;
+}
+.lucky{
+    width: 50%;
+}

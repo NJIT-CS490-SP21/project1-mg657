@@ -1,5 +1,5 @@
 <html>
-	<link rel="stylesheet" href={{ url_for( 'static', filename='style.css' )}} />
+	<link rel="stylesheet" href={{ url_for( 'static', filename='result.css' )}} />
 	<center>
 		<body>
 			<h1>
@@ -19,7 +19,7 @@
 		<img src= {{song_image}} />
 			<br>
 				<br>
-        {% if song_prev_link == None %}  <!--cast songURL to string-->
+        {% if song_prev_link == None %} 
 			<a href={{song_link}} target="_blank">
 			    Song Preview Unavailable, 
 				    <br>
@@ -30,9 +30,12 @@
         {% endif %}
         <br>
         <br>
-        <a href={{song_lyrics}} target="_blank">
-			    Check out the lyrics!
-			</a>
+        {% if song_lyrics == 'Sorry, there are no lyrics available for this song' %}  
+			<h3 class = "lyrics">{{song_lyrics}}</h3>
+        {% else %}
+            <a href={{song_lyrics}} target="_blank">
+			    Check out the lyrics!</a>
+        {% endif %}
 		</body>
 	</center>
 </html>
