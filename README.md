@@ -5,7 +5,7 @@ CLI Command: `git clone https://github.com/NJIT-CS490-SP21/project1-mg657`
 <br /> If you cd into the repository you'll see all the files
 ## APIs
 Sign up for a Spotify Developer Account at [https://developer.spotify.com/](https://developer.spotify.com/)
-Register your application for Genius API [https://docs.genius.com/#/getting-started-h1](https://docs.genius.com/#/getting-started-h1)
+<br />Register your application for Genius API [https://docs.genius.com/#/getting-started-h1](https://docs.genius.com/#/getting-started-h1)
 ## Install Requirements (if not already installed)
 `pip install python-dotenv`
 <br />`pip install requests`
